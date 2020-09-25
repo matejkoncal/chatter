@@ -1,12 +1,16 @@
 const WebSocket = require('ws');
 const fs = require('fs');
-const http = require('http');
+const https = require('https');
+const options = {
+	key: fs.readFileSync('key.pem'),
+	cert: fs.readFileSync('cert.pem'),
+};
 
 myIP = require('my-ip');
-console.dir(`Chat is running on http://${myIP()}/`);
+console.dir(`Chat is running on https://${myIP()}/`);
 
-http
-	.createServer((req, resp) => {
+var server = https
+	.createServer(options, (req, resp) => {
 		var request = req.url;
 		if (request == '/' && req.headers.upgrade != 'websocket')
 			fs.readFile('index.html', (e, data) => {
@@ -15,9 +19,9 @@ http
 				resp.end();
 			});
 	})
-	.listen(80);
+	.listen(443);
 
-const wss = new WebSocket.Server({ port: 8080 });
+const wss = new WebSocket.Server({ server });
 
 wss.on('connection', function connection(ws) {
 	wsGlobal = ws;
