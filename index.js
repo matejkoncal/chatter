@@ -10,7 +10,7 @@ const options = {
 // console.dir(`Chat is running on https://${myIP()}/`);
 
 var server = https
-	.createServer(options, (req, resp) => {
+	.createServer((req, resp) => {
 		console.log(req);
 		var request = req.url;
 		if (request == '/' && req.headers.upgrade != 'websocket')
