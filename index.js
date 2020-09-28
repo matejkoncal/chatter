@@ -1,6 +1,6 @@
 const WebSocket = require('ws');
 const fs = require('fs');
-const https = require('https');
+const https = require('http');
 const options = {
 	key: fs.readFileSync('key.pem'),
 	cert: fs.readFileSync('cert.pem'),
@@ -9,7 +9,7 @@ const options = {
 // myIP = require('my-ip');
 // console.dir(`Chat is running on https://${myIP()}/`);
 
-var server = https
+var server = http
 	.createServer((req, resp) => {
 		console.log(req);
 		var request = req.url;
