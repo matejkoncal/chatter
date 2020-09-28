@@ -19,7 +19,7 @@ var server = https
 				resp.end();
 			});
 	})
-	.listen(443);
+	.listen();
 
 const wss = new WebSocket.Server({ server });
 
