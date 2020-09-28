@@ -6,11 +6,12 @@ const options = {
 	cert: fs.readFileSync('cert.pem'),
 };
 
-myIP = require('my-ip');
-console.dir(`Chat is running on https://${myIP()}/`);
+// myIP = require('my-ip');
+// console.dir(`Chat is running on https://${myIP()}/`);
 
 var server = https
 	.createServer(options, (req, resp) => {
+		console.log(req);
 		var request = req.url;
 		if (request == '/' && req.headers.upgrade != 'websocket')
 			fs.readFile('index.html', (e, data) => {
